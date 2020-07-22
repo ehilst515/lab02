@@ -1,0 +1,17 @@
+article{
+    float: left;
+    height: 300px;
+    width: 300px;
+    margin: 10px;
+    background-color: #DCCFEC;
+    text-align: center;
+}
+
+footer{
+    text-align: center;
+}
+
+#filter-selection{
+    margin-left: 50%;
+    margin-top: 30px;
+}
