@@ -10,8 +10,7 @@ $.ajax('./data/page-1.json', ajaxSettings)
         console.log(data.hornedAnimal);
         const arrayOfAnimals = data.hornedAnimal;
         arrayOfAnimals.forEach(animal => {
-            const animalObject = new Animal(animal);
-            Animal.all.push(animalObject);
+            Animal.all.push(new Animal(animal));
         });
     })
     .then(()=>{
@@ -21,34 +20,44 @@ $.ajax('./data/page-1.json', ajaxSettings)
     });  
 });
 
-
-// construct animal objects
-function Animal(animal) {
+function Animal(obj){
+    for(let key in obj){
+        this[key] = obj[key];
+    }
     this.title = animal.title;
     this.image = animal.image_url;
     this.description = animal.description;
-    this.keyword = animal.keyword;
-    this.horns = animal.horns;
-    this.keyword = animal.keyword;
-    if(Animal.allKeywords.indexOf(this.keyword) < 0){
-        Animal.allKeywords.push(this.keyword);
-    }
-}
+};
 
-Animal.all = [];
-Animal.allKeywords = [];
 
-// render to page
-Animal.prototype.render = function (){
-    let $renderedAnimal = $('.animal-template').clone();
-    $renderedAnimal.removeClass('animal-template');
-    $renderedAnimal.find('.animal-title').text(this.title);
-    $renderedAnimal.find('#animal-image').attr('src', this.image);
-    $renderedAnimal.find('#animal-image').attr('alt',this.title);
-    $renderedAnimal.find('#animal-description').text(this.description);
-    $renderedAnimal.attr('data-keyword', this.keyword);
-    return $renderedAnimal
-}
+
+// // construct animal objects
+// function Animal(animal) {
+//     this.title = animal.title;
+//     this.image = animal.image_url;
+//     this.description = animal.description;
+//     this.keyword = animal.keyword;
+//     this.horns = animal.horns;
+//     this.keyword = animal.keyword;
+//     if(Animal.allKeywords.indexOf(this.keyword) < 0){
+//         Animal.allKeywords.push(this.keyword);
+//     }
+// }
+
+// Animal.all = [];
+// Animal.allKeywords = [];
+
+// // render to page
+// Animal.prototype.render = function (){
+//     let $renderedAnimal = $('.animal-template').clone();
+//     $renderedAnimal.removeClass('animal-template');
+//     $renderedAnimal.find('.animal-title').text(this.title);
+//     $renderedAnimal.find('#animal-image').attr('src', this.image);
+//     $renderedAnimal.find('#animal-image').attr('alt',this.title);
+//     $renderedAnimal.find('#animal-description').text(this.description);
+//     $renderedAnimal.attr('data-keyword', this.keyword);
+//     return $renderedAnimal
+// }
 
 function renderAnimals(){
     Animal.all.forEach(animal => $('#render').append(animal.render()));
