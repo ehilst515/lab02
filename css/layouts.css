@@ -1,11 +1,9 @@
-article{
-    float: left;
-    height: 300px;
-    width: 300px;
-    margin: 10px;
-    background-color: #DCCFEC;
-    text-align: center;
+img{
+    max-height: 200px;
+    max-width: 200px;
 }
+
+
 
 footer{
     text-align: center;
