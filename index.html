@@ -5,10 +5,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="css/styles.css">
-      <script id='animal-template' type='text/x-tmpl-mustache'>
-        <article class="animal-template animal" data-keyword="">
+      <script id="animal-template" type="text/x-tmpl-mustache">
+        <article class="animal" data-keyword="{{keyword}}">
           <h2 class="animal-title">{{title}}</h2>
-          {{{image}}}
+          <img src="{{image_url}}" alt="{{title}}">
           <p id="animal-description">{{description}}</p>
         </article>
       </script>
@@ -22,9 +22,7 @@
         </select>
       </div>
     </header>
-    <main id = 'render'>
-        <article class="animals">
-        </article>
+    <main id ="animal-placeholder">
     </main>
     <footer>
       &copy; 2018 Code Fellows
