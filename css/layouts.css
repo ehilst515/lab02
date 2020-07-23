@@ -3,13 +3,11 @@ img{
     max-width: 200px;
 }
 
-
-
 footer{
     text-align: center;
 }
 
 #filter-selection{
-    margin-left: 50%;
-    margin-top: 30px;
+    display: flex;
+    justify-content: center;
 }
