@@ -6,7 +6,7 @@ const ajaxSettings = {
     dataType: 'json'
 };
 $.ajax('./data/page-1.json', ajaxSettings)
-    .then(data => {
+    .then((data) => {
         console.log(data.hornedAnimal);
         const arrayOfAnimals = data.hornedAnimal;
         arrayOfAnimals.forEach(animal => {
@@ -15,8 +15,8 @@ $.ajax('./data/page-1.json', ajaxSettings)
     })
     .then(()=>{
         renderAnimals();
-        renderFilters();
-        handleFilters();
+        // renderFilters();
+        // handleFilters();
     });  
 });
 
@@ -24,9 +24,10 @@ function Animal(obj){
     for(let key in obj){
         this[key] = obj[key];
     }
-    this.title = animal.title;
-    this.image = animal.image_url;
-    this.description = animal.description;
+    this.title = Animal.title;
+    this.image = Animal.image_url;
+    this.description = Animal.description;
+    this.keyword = Animal.keyword;
 };
 
 
@@ -44,8 +45,18 @@ function Animal(obj){
 //     }
 // }
 
-// Animal.all = [];
+Animal.all = [];
 // Animal.allKeywords = [];
+
+Animal.prototype.render = function(){
+    const templateHTML = $('#animal-template').html();
+    const renderedHTML = Mustache.render(templateHTML, this);
+    return renderedHTML;
+}
+
+function renderAnimals(){
+    Animal.all.forEach(animal => $('#animals-template').append(animal.render()));
+}
 
 // // render to page
 // Animal.prototype.render = function (){
@@ -59,26 +70,26 @@ function Animal(obj){
 //     return $renderedAnimal
 // }
 
-function renderAnimals(){
-    Animal.all.forEach(animal => $('#render').append(animal.render()));
-    $('.animal-template').remove();
-}
+// function renderAnimals(){
+//     Animal.all.forEach(animal => $('#render').append(animal.render()));
+//     $('.animal-template').remove();
+// }
 
-function renderFilters(){
-    Animal.allKeywords.sort();
-    Animal.allKeywords.forEach(keyword =>{
-        const $option = $('<option>').text(keyword).attr('value', keyword);
-            $('#keyword-filter').append($option);
-    });
-}
+// function renderFilters(){
+//     Animal.allKeywords.sort();
+//     Animal.allKeywords.forEach(keyword =>{
+//         const $option = $('<option>').text(keyword).attr('value', keyword);
+//             $('#keyword-filter').append($option);
+//     });
+// }
 
-function handleFilters(){
-    $('#keyword-filter').on('change', function() {
-        if($(this).val() !=='default'){
-            $('.animal').hide();
-            $(`.animal[data-keyword="${$(this).val()}"]`).fadeIn();
-        } else {
-            $('.animal').fadeIn();
-        }
-    });
-}
+// function handleFilters(){
+//     $('#keyword-filter').on('change', function() {
+//         if($(this).val() !=='default'){
+//             $('.animal').hide();
+//             $(`.animal[data-keyword="${$(this).val()}"]`).fadeIn();
+//         } else {
+//             $('.animal').fadeIn();
+//         }
+//     });
+// }
